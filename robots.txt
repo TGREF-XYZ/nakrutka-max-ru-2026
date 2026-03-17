@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Sitemap: https://tgref-xyz.github.io/nakrutka-max-ru-2026/sitemap.xml
+Host: tgref-xyz.github.io
