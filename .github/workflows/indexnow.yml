@@ -1,0 +1,27 @@
+name: IndexNow Ping
+on:
+  push:
+    branches: [main]
+jobs:
+  indexnow:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Yandex IndexNow
+        run: |
+          curl -s -o /dev/null -w "Yandex: %{http_code}\n" \
+            "https://yandex.com/indexnow?url=https://tgref-xyz.github.io/nakrutka-max-ru-2026/&key=e4b7f3a9c2d1e8f6a5b0c7d4e3f2a1b9"
+      - name: Ping Bing IndexNow
+        run: |
+          curl -s -o /dev/null -w "Bing: %{http_code}\n" \
+            "https://www.bing.com/indexnow?url=https://tgref-xyz.github.io/nakrutka-max-ru-2026/&key=e4b7f3a9c2d1e8f6a5b0c7d4e3f2a1b9"
+      - name: Ping PubSubHubbub
+        run: |
+          curl -s -o /dev/null -w "PubSub: %{http_code}\n" \
+            -X POST -d "hub.mode=publish&hub.url=https://tgref-xyz.github.io/nakrutka-max-ru-2026/" \
+            "https://pubsubhubbub.appspot.com/"
+      - name: Ping Pingomatic
+        run: |
+          curl -s -o /dev/null -w "Pingomatic: %{http_code}\n" \
+            -X POST -H "Content-Type: text/xml" \
+            -d "<?xml version='1.0'?><methodCall><methodName>weblogUpdates.ping</methodName><params><param><value>Nakrutka MAX.RU 2026</value></param><param><value>https://tgref-xyz.github.io/nakrutka-max-ru-2026/</value></param></params></methodCall>" \
+            "https://rpc.pingomatic.com/"
